@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <import type="com.armboldmind.mvvmtest.shared.utils.DateTimeUtils" />
+
+        <variable
+            name="news"
+            type="com.armboldmind.mvvmtest.model.newsModels.NewsDetailsModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activities.newsActivity.fragments.NewsListFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/news_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@{news.title}"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/text_size_6" />
+
+                <TextView
+                    android:id="@+id/news_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:text="@{DateTimeUtils.convertServerDate(news.getCreatedDate(), DateTimeUtils.SERVER_DATE_PATTERN, DateTimeUtils.DATE_PATTERN_DAY_MONTH_YEAR)}"
+                    android:textColor="@color/gray_color_4"
+                    android:textSize="@dimen/text_size_4" />
+
+                <TextView
+                    android:id="@+id/news_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@{(news.description != null) ? Html.fromHtml(news.description) : null}"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/text_size_5" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/news_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</layout>

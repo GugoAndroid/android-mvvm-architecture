@@ -17,6 +17,7 @@ import com.armboldmind.mvvmtest.shared.data.networking.CallResponseObserver;
 import com.armboldmind.mvvmtest.shared.data.networking.NetworkError;
 import com.armboldmind.mvvmtest.shared.di.scopes.NewsScope;
 import com.armboldmind.mvvmtest.shared.helpers.SharedPreferencesHelper;
+import com.armboldmind.mvvmtest.shared.utils.AppConstants;
 import com.armboldmind.mvvmtest.viewModel.root.BaseViewModel;
 
 import javax.inject.Inject;
@@ -61,7 +62,7 @@ public class SignInViewModel extends BaseViewModel {
 
             @Override
             public void onFailure(NetworkError networkError) {
-                errorView(networkError);
+                errorToast(networkError.getAppErrorMessage());
             }
 
             @Override
@@ -78,7 +79,7 @@ public class SignInViewModel extends BaseViewModel {
             @Override
             public void onSuccess(ResponseModel<SignInResponseModel> responseModel) {
                 if (responseModel.getSuccess()) {
-                    mShared.setStringSharedPreferences("Token", responseModel.getData().getToken());
+                    mShared.setStringSharedPreferences(AppConstants.TOKEN, responseModel.getData().getToken());
                     mLiveDataSignUp.setValue(responseModel.getData());
                     mLiveDataSignUp.removeSource(sourceLiveData);
                 }
@@ -86,7 +87,7 @@ public class SignInViewModel extends BaseViewModel {
 
             @Override
             public void onFailure(NetworkError networkError) {
-                errorView(networkError);
+                errorToast(networkError.getAppErrorMessage());
             }
 
             @Override

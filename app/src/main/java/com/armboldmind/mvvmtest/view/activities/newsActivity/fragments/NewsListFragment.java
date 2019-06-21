@@ -17,8 +17,6 @@ import com.armboldmind.mvvmtest.view.activities.root.BaseFragment;
 import com.armboldmind.mvvmtest.view.adapters.NewsListAdapter;
 import com.armboldmind.mvvmtest.viewModel.newsActivity.NewsListViewModel;
 
-import java.util.Objects;
-
 public class NewsListFragment extends BaseFragment {
 
     private FragmentNewsListBinding mBinding;
@@ -40,7 +38,7 @@ public class NewsListFragment extends BaseFragment {
     }
 
     private void initViewModel() {
-        mViewModel = createViewModel(NewsListViewModel.class);
+        mViewModel = createViewModel(NewsListViewModel.class, this);
 
         mViewModel.getLiveData().observe(this, mainListItemModels -> {
             mBinding.newsRecyclerView.setAdapter(new NewsListAdapter(mainListItemModels, id -> ((NewsActivity) mActivity).loadNewsDetailsFragment(id)));

@@ -2,9 +2,8 @@ package com.armboldmind.mvvmtest.view.activities.signInActivity.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.armboldmind.mvvmtest.databinding.FragmentSignInBinding;
 import com.armboldmind.mvvmtest.model.authorizationModels.GuestModel;
 import com.armboldmind.mvvmtest.model.authorizationModels.SignInRequestModel;
 import com.armboldmind.mvvmtest.shared.utils.CommonUtils;
-import com.armboldmind.mvvmtest.shared.utils.ViewUtils;
 import com.armboldmind.mvvmtest.view.activities.newsActivity.NewsActivity;
 import com.armboldmind.mvvmtest.view.activities.root.BaseFragment;
 import com.armboldmind.mvvmtest.viewModel.signInActivity.SignInViewModel;
@@ -46,10 +44,11 @@ public class SignInFragment extends BaseFragment {
     private void initBindingView() {
         mBinding.setClickListener(new SignInFragmentClickHandler());
         mBinding.setSignIn(mSignInRequestModel);
+        mBinding.signInLoginButtonLoading.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white_color), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void initViewModel() {
-        mViewModel = createViewModel(SignInViewModel.class);
+        mViewModel = createViewModel(SignInViewModel.class, this);
         mViewModel.getLiveDataSignIn().observe(this, signInResponseModel -> loadNewsListPage());
         mViewModel.getLiveDataSignUp().observe(this, signInResponseModel -> loadNewsListPage());
     }
@@ -59,12 +58,23 @@ public class SignInFragment extends BaseFragment {
         mActivity.finish();
     }
 
+    @Override
+    public void onToast(String errorMessage) {
+        super.onToast(errorMessage);
+        mSignInRequestModel.setIsLoadedGuestButton(false);
+        mSignInRequestModel.setIsLoadedSignInButton(false);
+    }
+
     public class SignInFragmentClickHandler {
         public void onClickSignInButton() {
+            mSignInRequestModel.setIsLoadedSignInButton(true);
+
             mViewModel.signIn(mSignInRequestModel);
         }
 
         public void onClickGuestButton() {
+            mSignInRequestModel.setIsLoadedGuestButton(true);
+
             GuestModel mGuestModel = new GuestModel();
             mGuestModel.setOsTypeId(1);
             mGuestModel.setDeviceToken("cW05tWv5vlI:APA91bFFymMKfFkyyxAA25YZoSF7d5zxcAsyqFA1dG-3gfyyXkPiB3khMujF6yGJM1dKBleCoPYx4HwAMYTsKCOVNrnfqWAcPZfdpqgg16TOY9-AcqmCHmaLc9pkDnHhByO7h4WP-gLN");

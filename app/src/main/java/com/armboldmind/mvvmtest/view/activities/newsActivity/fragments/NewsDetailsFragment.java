@@ -41,7 +41,7 @@ public class NewsDetailsFragment extends BaseFragment {
     }
 
     private void initViewModel() {
-        mViewModel = createViewModel(NewsDetailsViewModel.class);
+        mViewModel = createViewModel(NewsDetailsViewModel.class, this);
 
         mViewModel.getLiveData().observe(this, newsDetailsModel -> {
             mBinding.setNews(newsDetailsModel);

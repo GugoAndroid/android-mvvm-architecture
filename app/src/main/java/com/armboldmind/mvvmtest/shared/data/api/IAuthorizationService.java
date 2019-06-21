@@ -15,6 +15,6 @@ public interface IAuthorizationService {
     @POST("api/token/signIn")
     LiveData<ApiResponse<ResponseModel<SignInResponseModel>>> signIn(@Body SignInRequestModel signInRequestModel);
 
-    @POST("api/token/signUpAsGuest")
+    @POST("api/token/signUpAsGuesta")
     LiveData<ApiResponse<ResponseModel<SignInResponseModel>>> signUpAsGuest(@Body GuestModel guestModel);
 }

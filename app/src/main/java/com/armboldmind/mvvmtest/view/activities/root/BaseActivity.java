@@ -29,11 +29,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         super.onCreate(savedInstanceState);
     }
 
-    protected <T extends BaseViewModel> T createViewModel(@NonNull Class<T> modelClass) {
+    protected <T extends BaseViewModel> T createViewModel(@NonNull Class<T> modelClass, @NonNull IBaseView view) {
         T viewModel = ViewModelProviders.of(this).get(modelClass);
-        viewModel.getServerErrorLiveData().observe(this, aBoolean -> showServerError());
-        viewModel.getNetworkErrorLiveData().observe(this, aBoolean -> showNetworkError());
-        viewModel.getToastMessageLiveData().observe(this, this::onToast);
+        viewModel.getServerErrorLiveData().observe(this, aBoolean -> view.showServerError());
+        viewModel.getNetworkErrorLiveData().observe(this, aBoolean -> view.showNetworkError());
+        viewModel.getToastMessageLiveData().observe(this, view::onToast);
+        viewModel.getSnackBarMessageLiveData().observe(this, view::onSnackBar);
         return viewModel;
     }
 

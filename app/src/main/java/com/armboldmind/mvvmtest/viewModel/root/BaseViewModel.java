@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.armboldmind.mvvmtest.shared.data.networking.NetworkError;
-import com.bumptech.glide.load.HttpException;
 
 public class BaseViewModel extends AndroidViewModel {
 
@@ -18,13 +17,14 @@ public class BaseViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> mServerErrorLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mNetworkErrorLiveData = new MutableLiveData<>();
     private MutableLiveData<String> mToastMessageLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> mSnackBarMessageLiveData = new MutableLiveData<>();
 
     protected void errorToast(String errorMessage) {
         mToastMessageLiveData.setValue(errorMessage);
     }
 
-    protected void errorSnackBar(String errorMessage) {
-        mToastMessageLiveData.setValue(errorMessage);
+   protected void errorSnackBar(String errorMessage) {
+       mSnackBarMessageLiveData.setValue(errorMessage);
     }
 
     protected void errorView(NetworkError networkError) {
@@ -46,5 +46,9 @@ public class BaseViewModel extends AndroidViewModel {
 
     public MutableLiveData<String> getToastMessageLiveData() {
         return mToastMessageLiveData;
+    }
+
+    public MutableLiveData<String> getSnackBarMessageLiveData() {
+        return mSnackBarMessageLiveData;
     }
 }

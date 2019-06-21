@@ -21,9 +21,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
         }
     }
 
-    protected <T extends BaseViewModel> T createViewModel(@NonNull Class<T> modelClass) {
+    protected <T extends BaseViewModel> T createViewModel(@NonNull Class<T> modelClass, @NonNull IBaseView view) {
         if (mBaseActivity != null) {
-            return mBaseActivity.createViewModel(modelClass);
+            return mBaseActivity.createViewModel(modelClass, view);
         }
         return null;
     }

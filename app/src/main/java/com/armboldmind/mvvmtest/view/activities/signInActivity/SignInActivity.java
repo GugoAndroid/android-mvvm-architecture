@@ -31,7 +31,6 @@ public class SignInActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.replace(mViewBinding.singInFragmentContainer.getId(), mFragment, AppConstants.SIGN_IN_FRAGMENT);
-        fragmentTransaction.addToBackStack(AppConstants.SIGN_IN_FRAGMENT);
         fragmentTransaction.commit();
     }
 }

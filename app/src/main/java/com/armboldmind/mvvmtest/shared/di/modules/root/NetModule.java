@@ -6,6 +6,7 @@ import android.app.Application;
 import com.armboldmind.mvvmtest.BuildConfig;
 import com.armboldmind.mvvmtest.shared.data.networking.LiveDataCallAdapterFactory;
 import com.armboldmind.mvvmtest.shared.helpers.SharedPreferencesHelper;
+import com.armboldmind.mvvmtest.shared.utils.AppConstants;
 import com.armboldmind.mvvmtest.shared.utils.CommonUtils;
 import com.armboldmind.mvvmtest.shared.utils.NetworkStatusUtils;
 import com.google.gson.FieldNamingPolicy;
@@ -51,8 +52,8 @@ public class NetModule {
 
         return new OkHttpClient.Builder().addInterceptor(chain -> {
             String token = "";
-            if (shared.getStringSharedPreferences("Token") != null)
-                token = shared.getStringSharedPreferences("Token");
+            if (shared.getStringSharedPreferences(AppConstants.TOKEN) != null)
+                token = shared.getStringSharedPreferences(AppConstants.TOKEN);
 
             Request original = chain.request();
             // Customize the request

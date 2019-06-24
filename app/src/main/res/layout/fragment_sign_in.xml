@@ -14,6 +14,10 @@
             type="com.armboldmind.mvvmtest.model.authorizationModels.SignInRequestModel" />
 
         <variable
+            name="guestModel"
+            type="com.armboldmind.mvvmtest.model.authorizationModels.GuestModel" />
+
+        <variable
             name="clickListener"
             type="com.armboldmind.mvvmtest.view.activities.signInActivity.fragments.SignInFragment.SignInFragmentClickHandler" />
     </data>
@@ -71,14 +75,14 @@
                     android:textAllCaps="true"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/text_size_4"
-                    android:visibility="@{signIn.isLoadedSignInButton ? v.INVISIBLE : v.VISIBLE}" />
+                    android:visibility="@{signIn.isLoaded ? v.INVISIBLE : v.VISIBLE}" />
 
                 <ProgressBar
                     android:id="@+id/sign_in_login_button_loading"
                     android:layout_width="@dimen/view_size_4"
                     android:layout_height="@dimen/view_size_4"
                     android:layout_centerInParent="true"
-                    android:visibility="@{signIn.isLoadedSignInButton ? v.VISIBLE : v.INVISIBLE}" />
+                    android:visibility="@{signIn.isLoaded ? v.VISIBLE : v.INVISIBLE}" />
 
             </RelativeLayout>
 
@@ -101,14 +105,14 @@
                 android:text="@string/continue_as_a_guest"
                 android:textColor="@color/main_red_color"
                 android:textSize="@dimen/text_size_4"
-                android:visibility="@{signIn.isLoadedGuestButton ? v.INVISIBLE : v.VISIBLE}" />
+                android:visibility="@{guestModel.isLoaded ? v.INVISIBLE : v.VISIBLE}" />
 
             <ProgressBar
                 android:id="@+id/sign_in_guest_button_loading"
                 android:layout_width="@dimen/view_size_4"
                 android:layout_height="@dimen/view_size_4"
                 android:layout_centerInParent="true"
-                android:visibility="@{signIn.isLoadedGuestButton ? v.VISIBLE : v.INVISIBLE}" />
+                android:visibility="@{guestModel.isLoaded ? v.VISIBLE : v.INVISIBLE}" />
 
         </RelativeLayout>
 

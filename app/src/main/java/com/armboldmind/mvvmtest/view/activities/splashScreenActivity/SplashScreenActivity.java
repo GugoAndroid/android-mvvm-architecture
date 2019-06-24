@@ -9,7 +9,6 @@ import com.armboldmind.mvvmtest.view.activities.signInActivity.SignInActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

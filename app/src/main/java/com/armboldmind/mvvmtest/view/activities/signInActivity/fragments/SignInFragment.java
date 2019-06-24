@@ -26,6 +26,7 @@ public class SignInFragment extends BaseFragment {
     private Activity mActivity;
     private SignInViewModel mViewModel;
     private SignInRequestModel mSignInRequestModel;
+    private GuestModel mGuestModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,26 +62,26 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void onToast(String errorMessage) {
         super.onToast(errorMessage);
-        mSignInRequestModel.setIsLoadedGuestButton(false);
-        mSignInRequestModel.setIsLoadedSignInButton(false);
+        mSignInRequestModel.setIsLoaded(false);
+        mGuestModel.setIsLoaded(false);
     }
 
     public class SignInFragmentClickHandler {
         public void onClickSignInButton() {
-            mSignInRequestModel.setIsLoadedSignInButton(true);
+            mSignInRequestModel.setIsLoaded(true);
 
             mViewModel.signIn(mSignInRequestModel);
         }
 
         public void onClickGuestButton() {
-            mSignInRequestModel.setIsLoadedGuestButton(true);
-
-            GuestModel mGuestModel = new GuestModel();
+            mGuestModel = new GuestModel();
             mGuestModel.setOsTypeId(1);
             mGuestModel.setDeviceToken("cW05tWv5vlI:APA91bFFymMKfFkyyxAA25YZoSF7d5zxcAsyqFA1dG-3gfyyXkPiB3khMujF6yGJM1dKBleCoPYx4HwAMYTsKCOVNrnfqWAcPZfdpqgg16TOY9-AcqmCHmaLc9pkDnHhByO7h4WP-gLN");
             mGuestModel.setModelName(CommonUtils.getMobileModel());
             mGuestModel.setLanguageName("en");
+            mGuestModel.setIsLoaded(true);
             mGuestModel.setDeviceId(CommonUtils.getDeviceId(mActivity));
+            mBinding.setGuestModel(mGuestModel);
             mViewModel.signUpAsGuest(mGuestModel);
         }
     }

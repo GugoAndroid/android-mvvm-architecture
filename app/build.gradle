@@ -6,8 +6,8 @@ android {
         applicationId "com.armboldmind.mvvmtest"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //buildConfigField "String", "BASE_URL", "\"https://mcapi.armlon.co.uk/\""
         buildConfigField "String", "BASE_URL", "\"http://10.10.1.62:7777/\""

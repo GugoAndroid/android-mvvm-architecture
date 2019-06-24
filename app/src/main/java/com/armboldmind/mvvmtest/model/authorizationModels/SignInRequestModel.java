@@ -8,8 +8,7 @@ import com.armboldmind.mvvmtest.BR;
 public class SignInRequestModel extends BaseObservable {
     private String username;
     private String password;
-    private boolean isLoadedSignInButton;
-    private boolean isLoadedGuestButton;
+    private boolean isLoaded;
 
     @Bindable
     public String getUsername() {
@@ -32,22 +31,12 @@ public class SignInRequestModel extends BaseObservable {
     }
 
     @Bindable
-    public boolean getIsLoadedSignInButton() {
-        return this.isLoadedSignInButton;
+    public boolean getIsLoaded() {
+        return this.isLoaded;
     }
 
-    public void setIsLoadedSignInButton(boolean isLoaded) {
-        this.isLoadedSignInButton = isLoaded;
-        notifyPropertyChanged(BR.isLoadedSignInButton);
-    }
-
-    @Bindable
-    public boolean getIsLoadedGuestButton() {
-        return this.isLoadedGuestButton;
-    }
-
-    public void setIsLoadedGuestButton(boolean isLoaded) {
-        this.isLoadedGuestButton = isLoaded;
-        notifyPropertyChanged(BR.isLoadedGuestButton);
+    public void setIsLoaded(boolean isLoaded) {
+        this.isLoaded = isLoaded;
+        notifyPropertyChanged(BR.isLoaded);
     }
 }
